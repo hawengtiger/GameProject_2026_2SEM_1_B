@@ -9,12 +9,18 @@ public class QuestManager : MonoBehaviour
 
     private SimpleInventory inventory;
 
+    private AchievementManager achievementManager;
+
+    private void Awake()
+    {
+        inventory = FindAnyObjectByType<SimpleInventory>();
+        achievementManager = FindFirstObjectByType<AchievementManager>();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         questText.text = "진행 중인 퀘스트가 없습니다.";
-
-        inventory = FindAnyObjectByType<SimpleInventory>();
     }
 
     public void TalkToNPC(Quest npcQuest)
@@ -93,6 +99,11 @@ public class QuestManager : MonoBehaviour
         }
 
         currentQuest.state = QuestState.Completed;
+
+        if (achievementManager != null)
+        {
+            achievementManager.QuestCompleted();
+        }
 
         Debug.Log(currentQuest.questName + "퀘스트 완료!");
         UpdateQuestText();

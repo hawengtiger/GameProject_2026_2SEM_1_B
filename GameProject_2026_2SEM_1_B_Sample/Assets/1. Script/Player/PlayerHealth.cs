@@ -24,6 +24,8 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth = maxHealth;      // 최대로 설정
         }
+
+        UpdateHealthText();
     }
 
     public void UpdateHealthText()

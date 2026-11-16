@@ -17,8 +17,11 @@ public class PickupItem : MonoBehaviour
 
     private SimpleInventory inventory;
 
+    private AchievementManager achievementManager;
+
     private void Awake()
     {
+        achievementManager = FindFirstObjectByType<AchievementManager>();
         questManager = FindAnyObjectByType<QuestManager>();
         inventory = FindAnyObjectByType<SimpleInventory>();
     }
@@ -56,7 +59,17 @@ public class PickupItem : MonoBehaviour
         }
 
         Debug.Log(itemName + " " + amount + "개 획득");
-        questManager.AddQuestItem(itemName, amount);        // 추가
+
+        if (questManager != null)
+        {
+            questManager.AddQuestItem(itemName, amount);        // 추가
+        }
+
+        if (achievementManager != null)
+        {
+            achievementManager.ItemCollected(amount);
+        }
+
         Destroy(gameObject);
     }
 
