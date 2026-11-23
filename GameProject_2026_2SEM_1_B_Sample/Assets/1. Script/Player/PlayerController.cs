@@ -7,6 +7,8 @@ public enum PlayerState
     Normal,
     PickUp,
     Inventory,
+
+    Attack
 }
 
 public class PlayerController : MonoBehaviour
